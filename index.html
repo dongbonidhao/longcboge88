@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小波免费TG代理 - 实时抓取</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#f0f7ff',
+          100: '#e0effe',
+          500: '#0088cc',
+          600: '#0077b5',
+          950: '#030712',
+        }
+      },
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      }
+    }
+  }
+}
+</script>
+<style>
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    padding-top: 45px;
+  }
+  ::-webkit-scrollbar { width: 0px; background: transparent; }
+  .marquee-container {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    height: 40px;
+    display: flex; align-items: center;
+  }
+  .marquee-content {
+    white-space: nowrap;
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-content a {
+    background: linear-gradient(90deg, #f72585, #4361ee, #4cc9f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+    font-size: 13.5px;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+  .shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen pb-12 flex flex-col items-center selection:bg-brand-500/30 selection:text-brand-100">
+
+  <!-- 顶部跑马灯 -->
+  <div class="marquee-container">
+    <div class="marquee-content">
+      <a href="https://t.me/your_channel" target="_blank">欢迎来到小波免费代理频道 - 实时更新</a>
+    </div>
+  </div>
+
+  <!-- 背景装饰 -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] pointer-events-none z-0 overflow-hidden">
+    <div class="absolute top-[-10%] left-[15%] w-[40vw] h-[40vw] rounded-full bg-brand-500/10 blur-[120px] animate-pulse-slow"></div>
+    <div class="absolute top-[5%] right-[20%] w-[30vw] h-[30vw] rounded-full bg-purple-500/10 blur-[100px]"></div>
+  </div>
+
+  <main class="relative z-10 w-full max-w-2xl px-4 mt-12 flex-1">
+
+    <!-- 标题 -->
+    <header class="flex flex-col items-center text-center mb-10">
+      <div class="relative group mb-4">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-500 to-cyan-400 rounded-2xl blur opacity-40 group-hover:opacity-60 transition duration-500"></div>
+        <div class="relative w-16 h-16 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-center">
+          <i class="fab fa-telegram-plane text-3xl text-brand-500 transition-transform group-hover:scale-110 duration-300"></i>
+        </div>
+      </div>
+      <h1 class="text-3xl font-black tracking-tight text-white bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent">
+        免费TG代理
+      </h1>
+      <div class="flex items-center gap-2 mt-2 bg-white/5 border border-white/5 px-3 py-1 rounded-full backdrop-blur-md">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+        <span class="text-[11px] font-medium tracking-widest text-slate-400 uppercase">实时动态抓取最新代理</span>
+      </div>
+    </header>
+
+    <!-- 代理列表区域 -->
+    <section class="bg-slate-900/50 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl p-6 md:p-8">
+
+      <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/5">
+        <div>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">代理列表</p>
+          <p class="text-[11px] text-slate-500 mt-0.5">每隔20分钟自动刷新</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-xs px-2.5 py-1 rounded-md font-bold tracking-wide bg-brand-500/10 text-brand-500 border border-brand-500/20" id="statusText">
+              🟢 节点可用: 0
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3" id="proxy-list">
+        <div class="shimmer h-[74px] rounded-xl border border-white/5"></div>
+        <div class="shimmer h-[74px] rounded-xl border border-white/5"></div>
+        <div class="shimmer h-[74px] rounded-xl border border-white/5"></div>
+        <div class="shimmer h-[74px] rounded-xl border border-white/5"></div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button id="refreshBtn" class="w-full sm:w-auto px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center gap-2 text-xs font-bold text-slate-300 transition-all">
+          <i class="fas fa-arrows-rotate text-brand-500"></i>
+          <span>拉取最新节点</span>
+        </button>
+        <div class="flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-[11px] text-slate-400 font-medium">
+          <span class="flex items-center gap-1.5"><i class="fas fa-shield-halved text-emerald-400"></i> TLS加密</span>
+          <span class="flex items-center gap-1.5"><i class="fas fa-bolt text-amber-400"></i> 极速响应</span>
+          <span class="flex items-center gap-1.5"><i class="fas fa-filter text-indigo-400"></i> 永久免费</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast 提示 -->
+  <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 opacity-0 -translate-y-2 transition-all duration-300 pointer-events-none z-[999]">
+    <div class="bg-slate-900 border border-white/10 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-bold">
+      <div class="w-5 h-5 rounded-md bg-emerald-500/20 flex items-center justify-center">
+        <i class="fas fa-check text-emerald-400 text-[10px]"></i>
+      </div>
+      <span id="toast-msg">操作成功</span>
+    </div>
+  </div>
+
+<script>
+// ============================================================
+// ⬇️ 在这里修改你的配置
+// ============================================================
+
+// 代理数据源地址（GitHub raw 或直链）
+const PROXY_API_URL = 'https://gh-proxy.org/https://raw.githubusercontent.com/xiaobno/free-proxy-list/refs/heads/main/all-proxies.txt';
+
+// 认证信息（如果代理不需要用户名密码，留空即可）
+const PROXY_USER = '';
+const PROXY_PASS = '';
+
+// ============================================================
+
+async function fetchProxies() {
+  const listContainer = document.getElementById('proxy-list');
+  const statusSpan = document.getElementById('statusText');
+
+  statusSpan.innerHTML = '🔄 同步中...';
+  listContainer.innerHTML = Array(4).fill(0).map(() =>
+    '<div class="shimmer h-[74px] rounded-xl border border-white/5"></div>'
+  ).join('');
+
+  try {
+    const response = await fetch(PROXY_API_URL);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const text = await response.text();
+
+    const lines = text.split('\n');
+    const filteredProxies = [];
+
+    for (const line of lines) {
+      const match = line.trim().match(/^(socks5:\/\/[^:\s]+:\d+)/i);
+      if (match) {
+        const rawProxy = match[1];
+        if (!/x/i.test(rawProxy)) {
+          filteredProxies.push(rawProxy);
+        }
+      }
+    }
+
+    if (filteredProxies.length === 0) {
+      throw new Error('未匹配到符合过滤规则的节点');
+    }
+
+    statusSpan.innerHTML = `🟢 节点可用: ${filteredProxies.length}`;
+    renderProxyNodes(filteredProxies);
+
+  } catch (error) {
+    console.error('获取代理失败:', error);
+    statusSpan.innerHTML = '🔴 同步失败';
+    listContainer.innerHTML = `
+      <div class="bg-red-500/5 rounded-xl p-6 text-center border border-red-500/10">
+        <i class="fas fa-circle-exclamation text-red-400 text-xl mb-1.5 block"></i>
+        <p class="text-xs font-semibold text-slate-300">无法加载节点数据</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">${error.message || '网络线路受阻'}</p>
+        <button onclick="fetchProxies()" class="mt-3 text-[11px] font-bold bg-white/5 hover:bg-white/10 px-4 py-1.5 rounded-lg border border-white/10 transition-all">尝试重新连接</button>
+      </div>
+    `;
+  }
+}
+
+function convertToTgLink(socksUrl) {
+  const url = socksUrl.replace(/^socks5:\/\//i, '');
+  const [hostport] = url.split('?');
+  const [server, port] = hostport.split(':');
+
+  if (PROXY_USER && PROXY_PASS) {
+    return `tg://socks?server=${encodeURIComponent(server)}&port=${encodeURIComponent(port)}&user=${encodeURIComponent(PROXY_USER)}&pass=${encodeURIComponent(PROXY_PASS)}`;
+  } else {
+    return `tg://socks?server=${encodeURIComponent(server)}&port=${encodeURIComponent(port)}`;
+  }
+}
+
+function renderProxyNodes(proxiesList) {
+  const list = document.getElementById('proxy-list');
+  if (!proxiesList.length) {
+    list.innerHTML = '<div class="text-center py-8 text-xs text-slate-500">暂无符合过滤标准的节点</div>';
+    return;
+  }
+
+  list.innerHTML = proxiesList.map((socksUrl, idx) => {
+    const serverMatch = socksUrl.match(/\/\/([^:]+):(\d+)/);
+    const serverIp = serverMatch ? serverMatch[1] : 'Unknown';
+    const port = serverMatch ? serverMatch[2] : '80';
+    const tgLink = convertToTgLink(socksUrl);
+    const displayIp = serverIp.length > 22 ? serverIp.substring(0, 20) + '...' : serverIp;
+
+    return `
+      <div class="group bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-brand-500/30 rounded-xl p-3.5 flex items-center justify-between transition-all duration-300">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-9 h-9 rounded-lg bg-slate-800 border border-white/5 flex items-center justify-center font-mono text-xs font-bold text-slate-400 group-hover:text-brand-500 group-hover:border-brand-500/20 transition-colors">
+            ${String(idx + 1).padStart(2, '0')}
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] font-extrabold tracking-wider text-slate-500 uppercase">SOCKS5 NODE</span>
+              <span class="w-1 h-1 rounded-full bg-cyan-400"></span>
+              <span class="text-[9px] font-mono text-slate-400">PORT:${port}</span>
+            </div>
+            <p class="text-sm font-mono font-bold text-slate-200 mt-0.5 truncate select-all" title="${serverIp}">${displayIp}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copyRawLink(event, '${tgLink}')" class="p-2 text-slate-400 hover:text-slate-200 bg-white/0 hover:bg-white/5 rounded-lg border border-transparent hover:border-white/5 transition-all" title="复制代理链接">
+            <i class="far fa-copy text-xs"></i>
+          </button>
+          <button onclick="connectProxy('${tgLink.replace(/'/g, "\\'")}')" class="px-3.5 py-1.5 text-xs font-bold bg-brand-500 hover:bg-brand-600 text-white rounded-lg shadow-lg shadow-brand-500/10 flex items-center gap-1 transition-all active:scale-95">
+            <span>连接</span>
+            <i class="fas fa-chevron-right text-[10px] opacity-70"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').innerText = message;
+  toast.classList.remove('opacity-0', '-translate-y-2');
+  toast.classList.add('opacity-100', 'translate-y-0');
+  setTimeout(() => {
+    toast.classList.remove('opacity-100', 'translate-y-0');
+    toast.classList.add('opacity-0', '-translate-y-2');
+  }, 1800);
+}
+
+function copyRawLink(event, link) {
+  event.stopPropagation();
+  navigator.clipboard.writeText(link);
+  showToast('代理配置已复制到剪贴板');
+}
+
+function connectProxy(tgUrl) {
+  navigator.clipboard.writeText(tgUrl);
+  showToast('已复制配置，正在呼叫 Telegram...');
+  setTimeout(() => {
+    window.location.href = tgUrl;
+  }, 400);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetchProxies();
+  document.getElementById('refreshBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    fetchProxies();
+  });
+});
+</script>
+</body>
+</html>
